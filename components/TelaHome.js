@@ -1,18 +1,23 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
-const TelaHome = ({ navigation }) => {
+const TelaHome = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Bem-vindo à Tela Home</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+          <Icon name="arrow-left" size={30} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Seja Bem vindo!</Text>
       </View>
-
       <View style={styles.card}>
         <TouchableOpacity onPress={() => navigation.navigate('TelaPagina1')}>
           <View style={styles.buttonContent}>
-            <Icon name="map-marker" size={30} color="white" />
+            <Icon name="map-marker" size={30} color="black" />
             <Text style={styles.buttonText}>Marcar no mapa</Text>
           </View>
         </TouchableOpacity>
@@ -20,7 +25,7 @@ const TelaHome = ({ navigation }) => {
       <View style={styles.card}>
         <TouchableOpacity onPress={() => navigation.navigate('TelaPagina2')}>
           <View style={styles.buttonContent}>
-            <Icon name="money" size={30} color="white" />
+            <Icon name="money" size={30} color="black" />
             <Text style={styles.buttonText}>Onde Doar</Text>
           </View>
         </TouchableOpacity>
@@ -32,32 +37,34 @@ const TelaHome = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    margin: 20,
+    backgroundColor:'#a4133c'
   },
   header: {
-    position: 'absolute',
-    alignContent: "center",
-    top: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
     width: '100%',
-    backgroundColor: '#a4133c', 
+    backgroundColor: '#D9D9D9',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     elevation: 5,
+    position:'absolute',
+    top:'0'
   },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black', 
+    marginLeft: 10,
   },
   card: {
     width: '80%',
+    height:"20%",
     aspectRatio: 1,
-    marginBottom: 20,
-    backgroundColor: '#a4133c', 
+    backgroundColor: '#D9D9D9',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
@@ -76,9 +83,12 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     marginLeft: 10,
-    color: 'white',
+    color: 'black', 
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  backButton: {
+    zIndex: 1,
   },
 });
 

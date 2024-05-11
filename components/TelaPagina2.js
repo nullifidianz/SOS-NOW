@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Clipboard, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 const TelaPagina2 = () => {
+  const navigation = useNavigation();
   const locaisParaDoar = [
     { id: 1, nome: 'SOS Rio Grande do Sul', causa: 'Enchentes no RS', pix: '92.958.800/0001-38' },
     { id: 2, nome: 'Causa Animal', causa: 'Doação de alimentos para animais', pix: '987654321' },
@@ -16,10 +19,12 @@ const TelaPagina2 = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+        <Icon name="arrow-left" size={30} color="black" />
+      </TouchableOpacity>
       <View style={styles.header}>
         <Text style={styles.headerText}>Instituições para Doar</Text>
       </View>
-
       {locaisParaDoar.map(local => (
         <TouchableOpacity 
           key={local.id} 
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
   card: {
     width: '80%',
     padding: 20,
-    backgroundColor: '#a4133c',
+    backgroundColor: '#d9d9d9',
     borderRadius: 10,
     marginBottom: 20,
     shadowColor: '#000',
@@ -71,9 +76,18 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#f0f0f0',
+    color: 'black',
     marginBottom: 10,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
   },
 });
 
 export default TelaPagina2;
+
+
+

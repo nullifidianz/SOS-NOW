@@ -1,103 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Button, TextInput, AsyncStorage, Alert, StyleSheet, ScrollView } from 'react-native';
-import * as Location from 'expo-location';
+import React from 'react';
+import { View, Image, Text, Button, StyleSheet } from 'react-native';
 
-const TelaPagina1 = () => {
-  const [mensagem, setMensagem] = useState('');
-  const [localizacao, setLocalizacao] = useState(null);
-  const [mensagensSalvas, setMensagensSalvas] = useState([]);
-
-  useEffect(() => {
-    pedirPermissaoLocalizacao();
-    carregarMensagensSalvas();
-  }, []);
-
-  const pedirPermissaoLocalizacao = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert('Permissão negada', 'Para enviar sua localização, permita o acesso ao GPS.');
-    }
-  };
-
-  const carregarMensagensSalvas = async () => {
-    try {
-      const mensagens = await AsyncStorage.getItem('mensagens');
-      if (mensagens) {
-        setMensagensSalvas(JSON.parse(mensagens));
-      }
-    } catch (error) {
-      console.error('Erro ao carregar mensagens salvas: ', error);
-      Alert.alert('Erro', 'Ocorreu um erro ao carregar as mensagens salvas.');
-    }
-  };
-
-  const enviarMensagemComLocalizacao = async () => {
-    if (!mensagem.trim()) {
-      Alert.alert('Mensagem vazia', 'Por favor, escreva uma mensagem antes de enviar.');
-      return;
-    }
-
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert('Permissão negada', 'Para enviar sua localização, permita o acesso ao GPS.');
-      return;
-    }
-
-    try {
-      const location = await Location.getCurrentPositionAsync({});
-      setLocalizacao(location);
-      const mensagemComLocalizacao = {
-        mensagem: mensagem,
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude
-      };
-      await salvarMensagemComLocalizacao(mensagemComLocalizacao);
-      setMensagem('');
-      setMensagensSalvas([...mensagensSalvas, mensagemComLocalizacao]);
-      Alert.alert('Mensagem enviada com sucesso');
-    } catch (error) {
-      console.error('Erro ao obter localização: ', error);
-      Alert.alert('Erro', 'Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.');
-    }
-  };
-
-  const salvarMensagemComLocalizacao = async (mensagemComLocalizacao) => {
-    try {
-      let mensagens = await AsyncStorage.getItem('mensagens');
-      if (mensagens) {
-        mensagens = JSON.parse(mensagens);
-      } else {
-        mensagens = [];
-      }
-      mensagens.push(mensagemComLocalizacao);
-      await AsyncStorage.setItem('mensagens', JSON.stringify(mensagens));
-    } catch (error) {
-      console.error('Erro ao salvar mensagem: ', error);
-      Alert.alert('Erro', 'Ocorreu um erro ao salvar a mensagem.');
-    }
-  };
-
+const TelaInicial = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Geolocalização</Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite sua mensagem"
-          value={mensagem}
-          onChangeText={text => setMensagem(text)}
-        />
-        <Button title="Enviar" onPress={enviarMensagemComLocalizacao} />
+      <Image
+        source={require('../assets/logo3.png')}
+        style={styles.logo}
+      />
+      <View style={styles.card}>
+        <Text style={styles.text}>Entre agora e comece a ajudar!</Text>
       </View>
-      <ScrollView style={styles.cardContainer}>
-        {mensagensSalvas.map((mensagem, index) => (
-          <View key={index} style={styles.card}>
-            <Text>{mensagem.mensagem}</Text>
-            <Text>Latitude: {mensagem.latitude}</Text>
-            <Text>Longitude: {mensagem.longitude}</Text>
-          </View>
-        ))}
-      </ScrollView>
+      <Button
+        title="Entrar"
+        onPress={() => navigation.navigate('TelaHome')}
+        color="#a4133c"
+      />
     </View>
   );
 };
@@ -105,44 +23,34 @@ const TelaPagina1 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingTop: 40,
     paddingHorizontal: 20,
-    backgroundColor: '#d9d9d9',
   },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  logo: {
+    width: 200,
+    height: 200,
     marginBottom: 20,
-    color: '#a4133c',
-  },
-  inputContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  input: {
-    width: '70%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingHorizontal: 10,
-  },
-  cardContainer: {
-    flex: 1,
-    width: '100%',
   },
   card: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: '#d9d9d9',
+    backgroundColor: '#a4133c',
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  text: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
-export default TelaPagina1;
+export default TelaInicial;

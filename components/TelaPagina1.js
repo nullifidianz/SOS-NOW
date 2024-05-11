@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, TextInput, AsyncStorage, Alert, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Button, TextInput, AsyncStorage, Alert, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import * as Location from 'expo-location';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 const TelaPagina1 = () => {
+  const navigation = useNavigation();
   const [mensagem, setMensagem] = useState('');
-  const [localizacao, setLocalizacao] = useState(null);
   const [mensagensSalvas, setMensagensSalvas] = useState([]);
 
   useEffect(() => {
@@ -45,7 +47,6 @@ const TelaPagina1 = () => {
 
     try {
       const location = await Location.getCurrentPositionAsync({});
-      setLocalizacao(location);
       const mensagemComLocalizacao = {
         mensagem: mensagem,
         latitude: location.coords.latitude,
@@ -77,17 +78,30 @@ const TelaPagina1 = () => {
     }
   };
 
+  const verLogMensagens = () => {
+    navigation.navigate('LogMensagens');
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Geolocalização</Text>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+          <Icon name="arrow-left" size={30} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Geolocalização</Text>
+        <View style={{ flex: 1 }} /> {/* Adiciona um espaçador flexível */}
+      </View>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
           placeholder="Digite sua mensagem"
           value={mensagem}
           onChangeText={text => setMensagem(text)}
+          placeholderTextColor="#333" // Altera a cor do placeholder
         />
-        <Button title="Enviar" onPress={enviarMensagemComLocalizacao} />
+        <TouchableOpacity onPress={enviarMensagemComLocalizacao} style={styles.sendButton}>
+          <Text style={styles.sendButtonText}>Enviar</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView style={styles.cardContainer}>
         {mensagensSalvas.map((mensagem, index) => (
@@ -98,6 +112,9 @@ const TelaPagina1 = () => {
           </View>
         ))}
       </ScrollView>
+      <TouchableOpacity onPress={verLogMensagens} style={styles.logButton}>
+        <Text style={styles.logButtonText}>Ver Log de Mensagens</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -109,13 +126,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 40,
     paddingHorizontal: 20,
-    backgroundColor: '#d9d9d9',
+    backgroundColor: '#a4133c',
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    backgroundColor: '#D9D9D9',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    elevation: 5,
+    position: 'absolute',
+    top: 0,
+  },
+  headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#a4133c',
+    color: 'black',
+    marginLeft: 50,
   },
   inputContainer: {
     width: '100%',
@@ -123,13 +153,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+    marginTop: 80, 
   },
   input: {
-    width: '70%',
+    flex: 1,
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     paddingHorizontal: 10,
+    backgroundColor: '#fff', 
   },
   cardContainer: {
     flex: 1,
@@ -142,6 +174,36 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     backgroundColor: '#d9d9d9',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 10,
+    left: 20,
+    zIndex: 1,
+  },
+  sendButton: {
+    backgroundColor: '#d9d9d9',
+    borderRadius: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginLeft: 10, 
+  },
+  sendButtonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  logButton: {
+    marginTop: 20,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  logButtonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
