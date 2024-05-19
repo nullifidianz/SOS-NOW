@@ -1,32 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 import * as Clipboard from 'expo-clipboard';
+import { useNavigation } from '@react-navigation/native';
 import Header from '../components/Header';
-
-const dados = [
-  { id: '1', nome: 'ONG Educação para Todos', causa: 'Educação', pix: 'contato@educacaotodos.org' },
-  { id: '2', nome: 'Instituto Saúde e Vida', causa: 'Saúde', pix: 'doacoes@saudevida.org' },
-  { id: '3', nome: 'Associação Verde Esperança', causa: 'Meio Ambiente', pix: 'apoie@verdeesperanca.org' },
-  { id: '4', nome: 'Abrigo Animal Feliz', causa: 'Proteção Animal', pix: 'ajude@animalfeliz.org' },
-  { id: '5', nome: 'Centro de Assistência Social', causa: 'Assistência Social', pix: 'ajuda@assistenciasocial.org' },
-  { id: '6', nome: 'Fundação Cultura Viva', causa: 'Cultura', pix: 'contato@culturaviva.org' },
-  { id: '7', nome: 'Projeto Esporte para Todos', causa: 'Esporte', pix: 'doe@esportetodos.org' },
-  { id: '8', nome: 'Inovação Tech', causa: 'Tecnologia', pix: 'apoio@inovacaotech.org' },
-  { id: '9', nome: 'Movimento Vida Melhor', causa: 'Combate à Fome', pix: '12345678901' },
-  { id: '10', nome: 'Associação Bem-Estar Animal', causa: 'Proteção Animal', pix: '23456789012' },
-  { id: '11', nome: 'Fundação Novo Futuro', causa: 'Educação', pix: '34567890123' },
-  { id: '12', nome: 'ONG Saúde Integral', causa: 'Saúde', pix: '45678901234' },
-  { id: '13', nome: 'Projeto Limpa Terra', causa: 'Meio Ambiente', pix: '56789012345' },
-  { id: '14', nome: 'Associação Cultural Raízes', causa: 'Cultura', pix: '67890123456' },
-  { id: '15', nome: 'Centro de Tecnologia Avançada', causa: 'Tecnologia', pix: '78901234567' },
-  { id: '16', nome: 'Abrigo Esperança Viva', causa: 'Assistência Social', pix: '89012345678' },
-  { id: '17', nome: 'Fundação Esporte e Saúde', causa: 'Esporte', pix: '90123456789' },
-  { id: '18', nome: 'Casa de Acolhimento Amor', causa: 'Proteção Animal', pix: '98765432100' },
-  { id: '19', nome: 'Instituto de Pesquisa Ambiental', causa: 'Meio Ambiente', pix: 'doacoes@pesquisaambiental.org' },
-  { id: '20', nome: 'Rede de Apoio Estudantil', causa: 'Educação', pix: 'contribua@redeapoioestudantil.org' },
-];
+import firebase from '../config/firebase';
 
 export default function TelaDoacao() {
+  const [dados, setDados] = useState([]);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const doacoesRef = firebase.database().ref('doacoes');
+    doacoesRef.on('value', (snapshot) => {
+      const doacoes = snapshot.val();
+      if (doacoes) {
+        setDados(Object.values(doacoes));
+      } else {
+        setDados([]);
+      }
+    });
+  }, []);
+
   const copyToClipboard = async (pix) => {
     await Clipboard.setStringAsync(pix);
     Alert.alert('Copiado!', `O PIX ${pix} foi copiado para a área de transferência.`);
@@ -42,15 +36,22 @@ export default function TelaDoacao() {
     </View>
   );
 
+  const adicionarDoacao = () => {
+    navigation.navigate('AddDoacao');
+  };
+
   return (
     <View style={styles.container}>
       <Header title="Tela de Doações" />
       <FlatList
-        data = {dados}
+        data={dados}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.content}
       />
+      <TouchableOpacity style={styles.floatingButton} onPress={adicionarDoacao}>
+        <Text style={styles.floatingButtonText}>+</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -82,5 +83,21 @@ const styles = StyleSheet.create({
     color: '#EF233C',
     marginTop: 8,
     textDecorationLine: 'underline',
+  },
+  floatingButton: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    backgroundColor: '#D90429',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: 20,
+    bottom: 20,
+  },
+  floatingButtonText: {
+    color: '#EDF2F4',
+    fontSize: 30,
+    fontWeight: 'bold',
   },
 });
