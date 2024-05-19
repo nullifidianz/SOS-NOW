@@ -1,22 +1,21 @@
+import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import TelaInicial from './components/TelaInicial';
-import TelaHome from './components/TelaHome';
-import TelaPagina1 from './components/TelaPagina1';
-import TelaPagina2 from './components/TelaPagina2';
-import LogMensagens from './components/LogMensagens';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TelaLogin from './telas/TelaLogin';
+import TelaCadastro from './telas/TelaCadastro';
+import MainTabNavigator from './MainTabNavigator';
+import TelaDB from './telas/TelaDB'
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TelaInicial">
-        <Stack.Screen name="TelaInicial" component={TelaInicial} options={{ headerShown: false }} />
-        <Stack.Screen name="TelaHome" component={TelaHome} options={{ headerShown: false }} />
-        <Stack.Screen name="TelaPagina1" component={TelaPagina1} options={{ headerShown: false }} />
-        <Stack.Screen name="TelaPagina2" component={TelaPagina2} options={{ headerShown: false }} />
-        <Stack.Screen name="LogMensagens" component={LogMensagens} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={TelaLogin} options={{ headerShown: false }} />
+        <Stack.Screen name="Cadastro" component={TelaCadastro} options={{ headerShown: false }} />
+        <Stack.Screen name="Main" component={MainTabNavigator} options={{ headerShown: false }} />
+        <Stack.Screen name="TelaDB" component={TelaDB} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
