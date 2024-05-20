@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from '../components/Header';
@@ -13,8 +13,11 @@ export default function TelaHome({ navigation }) {
   return (
     <View style={styles.container}>
       <Header title="Início" />
-      <View style={styles.content}>
-        <Text style={styles.title}>Tela Inicial</Text>
+      <ScrollView contentContainerStyle={styles.content}>
+        <Text style={styles.title}>Bem vindo!</Text>
+        <Text style={styles.paragrafo}>
+        Utilize os botões abaixo para navegar pelas diferentes funcionalidades do aplicativo. Você pode encontrar locais para doação ou acessar o GPS para ver as mensagens próximas a sua região.
+        </Text>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('TelaDoacao')}
@@ -36,7 +39,7 @@ export default function TelaHome({ navigation }) {
           <MaterialIcons name="logout" size={24} color="#EDF2F4" />
           <Text style={styles.buttonText}>Sair</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
@@ -56,6 +59,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     color: '#2B2D42',
+  },
+  paragrafo: {
+    fontSize: 16,
+    color: '#2B2D42',
+    marginBottom: 20,
+    textAlign: 'center',
+    paddingHorizontal: 10,
   },
   button: {
     flexDirection: 'row',
@@ -72,7 +82,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#EDF2F4',
-    fontWeight:'bold',
+    fontWeight: 'bold',
     marginLeft: 10,
     fontSize: 18,
   },
