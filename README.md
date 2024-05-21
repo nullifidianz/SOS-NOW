@@ -34,24 +34,25 @@ TelaAddDoacao.js:
 ## Fluxograma
 
 [![](https://mermaid.ink/img/pako:eNp1ks9S2zAQxl9Fs2eTiW1sGTPTGRIngZIynYZyQOawjdREU1vKyDZTCHmYDoeeOPYJ_GIVcgKkf3SSdn_f7idp1zDXXEAKC4OrJbnMjnNF7DphZ6p9mkt9Qw4O3pEBuxQFEi7IVC-kuumggcs9fK6a9oeRmqj2URMjFrKqDXL9QIYvsiFytFG9VQ6dMmOfOthKNRlLI75gJbZI5pCRRbhNWCcKyQoNklNdiv8YeNt71PV-Q48cPWZXsmqwkPdIMo3tz_aXqPaICTvhsmvYAY872xOXP2UzLG5fk_8w3xU6Yxd4KxZb387O5ONsD3n_NzJANdfPb5bZe-ycjR19zqb2fu5B_7R-7oApy0SNxVJUhO-5Bw9KYUqU3P71-lmSQ70UpcghtVuO5lsOudpYDptaz-7UHNLaNMKDZsWxFplEOyIlpF-xqGx0hepa63IH2SOka_gOqR_RXuwfRklAg-AoPgx9D-4gjYOen0RxEiZh_4iGNNp4cO8K9HuUBjRKKA39IArifuiB_fNamw_daLoJ3fwGhKLa9Q?type=png)](https://mermaid.live/edit#pako:eNp1ks9S2zAQxl9Fs2eTiW1sGTPTGRIngZIynYZyQOawjdREU1vKyDZTCHmYDoeeOPYJ_GIVcgKkf3SSdn_f7idp1zDXXEAKC4OrJbnMjnNF7DphZ6p9mkt9Qw4O3pEBuxQFEi7IVC-kuumggcs9fK6a9oeRmqj2URMjFrKqDXL9QIYvsiFytFG9VQ6dMmOfOthKNRlLI75gJbZI5pCRRbhNWCcKyQoNklNdiv8YeNt71PV-Q48cPWZXsmqwkPdIMo3tz_aXqPaICTvhsmvYAY872xOXP2UzLG5fk_8w3xU6Yxd4KxZb387O5ONsD3n_NzJANdfPb5bZe-ycjR19zqb2fu5B_7R-7oApy0SNxVJUhO-5Bw9KYUqU3P71-lmSQ70UpcghtVuO5lsOudpYDptaz-7UHNLaNMKDZsWxFplEOyIlpF-xqGx0hepa63IH2SOka_gOqR_RXuwfRklAg-AoPgx9D-4gjYOen0RxEiZh_4iGNNp4cO8K9HuUBjRKKA39IArifuiB_fNamw_daLoJ3fwGhKLa9Q)
+
 ## Screenshots
 Tela de Login e tela de Cadastro - 
 
-![Tela login](./app/assets/images/banner.png)
+![Tela login](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/tela_login.png)
 
 Tela Home - 
 
-![Tela-Home](./app/assets/images/banner.png)
+![Tela-Home](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/tela_home.png)
 
 Tela GPS e DB de mensagens- 
 
-![Tela-gps](./app/assets/images/banner.png)
-![Tela-db](./app/assets/images/banner.png)
+![Tela-gps](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/telagps.png)
+![Tela-db](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/teladb.png)
 
 Tela Doação e Tela Cadastro de Doação - 
 
-![Tela-doacao](./app/assets/images/banner.png)
-![Tela-cadastro-doacao](./app/assets/images/banner.png)
+![Tela-doacao](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/tela_doacao.png)
+![Tela-cadastro-doacao]([./app/assets/images/banner.png](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/tela_add_doacao.png))
 
 ## Aprendizados
 
