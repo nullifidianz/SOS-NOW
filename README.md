@@ -52,7 +52,7 @@ Tela GPS e DB de mensagens-
 Tela Doação e Tela Cadastro de Doação - 
 
 ![Tela-doacao](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/tela_doacao.png)
-![Tela-cadastro-doacao]([./app/assets/images/banner.png](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/tela_add_doacao.png))
+![Tela-cadastro-doacao](https://github.com/nullifidianz/SOS-NOW/blob/main/imgs/tela_add_doacao.png)
 
 ## Aprendizados
 
