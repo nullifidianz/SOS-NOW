@@ -15,21 +15,33 @@ Para fins de demonstração, apenas a funcionalidade de GPS e de Doações foram
 
 
 
+
 ## Componentes e suas funcionalidades
-App.js:
-- Configura a navegação de pilha utilizando @react-navigation/native-stack.
+Autenticação de Usuário:
 
-MainTabNavigator.js:
-- Configura a navegação de abas utilizando @react-navigation/bottom-tabs.
+- Registro de novos usuários.
+- Login de usuários existentes.
 
-TelaLogin.js:
-- Tela de login dos usuários, utiliza Firebase Authentication.
+Gerenciamento de Doações:
 
-TelaCadastro.js:
-- Tela de cadastro dos usuários, utiliza Firebase Authentication.
+- Adicionar novos lugares para doação.
+- Listar lugares disponíveis.
+- Visualizar detalhes de doações.
 
-TelaAddDoacao.js:
-- Permite adicionar uma doação ao Firebase Realtime Database.
+Mensagens com localização:
+
+- Adicionar uma mensagem com a latitude e longitude do dispositivo.
+- Ver o banco de dados com todas as mensagens enviadas.
+- Clicar nas mensagens leva você ao ponto no Google Maps.
+
+Integração com Realtime Database:
+
+- Armazenamento de dados de usuários, doações e mensagens.
+- Autenticação de usuários.
+
+Navegação:
+
+- Navegação entre telas
   
 ## Fluxograma
 
