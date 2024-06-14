@@ -7,14 +7,14 @@ import firebase from "firebase";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC5DH7s3eMAUomN8eQP5idvPC3mzgPkX-E",
-  authDomain: "sos-rs-1151e.firebaseapp.com",
-  databaseURL: "https://sos-rs-1151e-default-rtdb.firebaseio.com",
-  projectId: "sos-rs-1151e",
-  storageBucket: "sos-rs-1151e.appspot.com",
-  messagingSenderId: "872510135862",
-  appId: "1:872510135862:web:a2ccbb4b5f5fd124fbc297",
-  measurementId: "G-M72CWMV77L"
+  apiKey: "YOUR_KEY_HERE",
+  authDomain: "YOUR_KEY_HERE,
+  databaseURL: "YOUR_KEY_HERE",
+  projectId: "YOUR_KEY_HERE,
+  storageBucket: "YOUR_KEY_HERE,
+  messagingSenderId: "YOUR_KEY_HERE",
+  appId: "YOUR_KEY_HERE",
+  measurementId: "YOUR_KEY_HERE"
 };
 
 
